@@ -1,4 +1,19 @@
-Using a similar framework as Narasimhan et al. \shortcite{narasimhan2016improving}, we model our web navigator model as a Markov Decision Process (MDP) \cite{puterman1994}. . .
+\paragraph{Queries: }  Since \textit{unoporuno} is an intelligent web navigation system, it requires some search engines and query generation models. In our work , we use four search engines including Google, DuckDuckGo, Researchgate, Citeceerx \PA{the search engine list should be modified. I didn't find the list.} . As person name is received from an available sociologist database, for each person we have $7$ possible number of queries as: \\
 
-This MDP is defined as a tuple $M(S, A, P, r, \gamma)$ where $S$ is a set of states, $A$ is a set of actions, $P :S\times A  \times S  \longrightarrow [0,1]$ is a transition function where $P(s'|s,a)$ encodes the probability of going to state $s'$ by being in state $s$, and choosing action $a$; $r : S \times A \longrightarrow R$ is a reward function (or penalty, if negative) obtained by choosing action $a$ in state $s$. Each 
+$<$person name$>$ $+$ (  $|$ doctorate $|$ institute $|$ master $|$ undergraduate $|$ university ) 
+
+\paragraph{Markov Decision Process: } Using a similar framework as Narasimhan et al. \shortcite{narasimhan2016improving}, we model our web navigator model as a Markov Decision Process (MDP) \cite{puterman1994}. . .
+
+This MDP is defined as a tuple $M(S, A, P, r, \gamma)$ where $S$ is a set of states, $A$ is a set of actions, $P :S\times A  \times S  \longrightarrow [0,1]$ is a transition function where $P(s'|s,a)$ encodes the probability of going to state $s'$ by being in state $s$, and choosing action $a$; $r : S \times A \longrightarrow R$ is a reward function (or penalty, if negative) obtained by choosing action $a$ in state $s$. Each parameter is detailed as the following.
+\begin{itemize}
+	\item The \textit{states} should be modeled in a way indicating the difference between the current and new snippets.  We use two models of sates in this paper:
+	\begin{itemize}
+		\item \textit{Vector based}: each state indicates with a vector of real values containing: 
+		(1)  one-hot encoding indicating new snippets is an output of which query type,
+		(2) one-hot 4 dimensional encoding indicating which research engine is used 
+		(3) 
+		\item \textit{text based} ( \PA{for keeping this definition we should be certain about Ivan codes and results.} )
+	\end{itemize}
+	\item \textit{Actions} 
+\end{itemize}
 

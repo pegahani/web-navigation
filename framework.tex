@@ -17,6 +17,6 @@ This MDP is defined as a tuple $M(S, A, P, r, \gamma)$ where $S$ is a set of sta
 	\end{itemize}
 	\item We have two \textit{Actions} including $q$ and $d$ indicating changing query and staying on the current query respectively. 
 	\item The \textit{transition function} $P$ 
-	\item The system goal is to extract the closest extracted organisation names and dates to the gold standards by generating less number of queries. For this reason, choosing $q$ action in any sate has a negative reward. And every time the extracted organisation name or date from a new snippet is close to the gold standards, the system receives a positive reward for instance $r(s, q) = -0.1$ or $r(s, d) = 10$ if the extracted organisation name (year) is in the list of organisation names (years) for gold standards. 
+	\item The system goal is to extract the closest extracted organisation names and dates to the gold standards by generating less number of queries. For this reason, choosing $q$ action in any sate has a negative reward. And every time the extracted organisation name or date from a new snippet is close to the gold standards, the system receives a positive reward for instance $r(s, q) = -0.1$ or $r(s, d) = 10$ if the extracted organisation name (year) is in the list of organisation names (years) for the gold standards. 
 \end{itemize}
 

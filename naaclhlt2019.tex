@@ -1,0 +1,104 @@
+%
+% File naacl2019.tex
+%
+%% Based on the style files for ACL 2018 and NAACL 2018, which were
+%% Based on the style files for ACL-2015, with some improvements
+%%  taken from the NAACL-2016 style
+%% Based on the style files for ACL-2014, which were, in turn,
+%% based on ACL-2013, ACL-2012, ACL-2011, ACL-2010, ACL-IJCNLP-2009,
+%% EACL-2009, IJCNLP-2008...
+%% Based on the style files for EACL 2006 by 
+%%e.agirre@ehu.es or Sergi.Balari@uab.es
+%% and that of ACL 08 by Joakim Nivre and Noah Smith
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[hyperref]{naaclhlt2019}
+\usepackage{times}
+\usepackage{latexsym}
+
+\usepackage{url}
+
+%\aclfinalcopy % Uncomment this line for the final submission
+%\def\aclpaperid{***} %  Enter the acl Paper ID here
+
+%\setlength\titlebox{5cm}
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 5cm (the original size); we will check this
+% in the camera-ready version and ask you to change it back.
+
+\newcommand\BibTeX{B{\sc ib}\TeX}
+
+\title{Learning to navigate web search results for Expert Tracking using Deep Reinforcement Learning}
+
+\author{Pegah Alizadhe \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} \\\And
+  Josue Urbina \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain}
+  Carl Posthuma \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} 
+  Jorge Garcia \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} 
+  Ivan Meza \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} 
+  Luis Pineda \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain}
+  \\}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We present a modification of \textit{Unoporuno} system first introduced by Flores et al. \citep{Flores2012} as an application of deep reinforcement learning and natural language processing methods to the immigration sociology. A manually extracted database containing researcher and experts of central and south America is supported by the sociologists. By receiving a person name from the sociologists database, We propose a method for extracting her organisation names and related activate years over her professional years using deep reinforcement learning approach. We improve the unoporuno system by tracking each person's professional movements instead of just verifying the hers mobility w.r.t her origin place. 
+\end{abstract}
+
+\section{Introduction}
+Luis Fernandez left his origin country (Argentina) in  $2005$ for doing a PHD in telecommunication. What does he do now? where is he now? where were other universities or organisations that he has worked for so far? for which periods? Sociologists of imigration and particularly those who are interested in ``brain drain" domain requires great deal of time, manual internet search or data source search (such as CVs, personal Web Pages, etc.) to answer such fine-grained examples \cite{Auriol2010,Meyer2006}. 
+
+
+\section{Previous work}
+
+\section{Reinforcement Learning for name extractions}
+Using a similar framework as Narasimhan et al. \shortcite{narasimhan2016improving}, we model our web navigator model as a Markov Decision Process (MDP) \cite{puterman1994}. . .
+
+This MDP is defined as a tuple $M(S, A, P, r, \gamma)$ where $S$ is a set of states, $A$ is a set of actions, $P :S\times A  \times S  \longrightarrow [0,1]$ is a transition function where $P(s′|s,a)$ encodes the probability of going to state $s'$ by being in state $s$, and choosing action $a$; $r : S \times A \longrightarrow R$ is a reward function (or penalty, if negative) obtained by choosing action $a$ in state $s$; 
+
+\section{Data}
+
+\section{Experiments}
+
+\section{Conclusions}
+
+\section*{Acknowledgments}
+
+\bibliography{naaclhlt2019}
+\bibliographystyle{acl_natbib}
+
+\appendix
+
+\section{Appendices}
+\label{sec:appendix}
+
+
+\section{Supplemental Material}
+\label{sec:supplemental}
+
+\end{document}

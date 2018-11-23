@@ -1,11 +1,11 @@
-In the Reinforcement Learning environment with a state set $S = s_1, \cdots, s_m$ and a  set of possible actions $A = a_1, \cdots, a_m$, the agent interacts with the environment by selecting an action $a$ in each state $s$ and going to the next state $s'$ until the terminal state condition is satisfied. This process is guided by a function namely policy $\pi : S \longrightarrow A$ by interacting the environment. The policy is calculable by assigning a punishment or reward $r(s, a)$ to each selected action $a$ in any state $s$.  
-
-A way of defining the quality of policies is the Q-value function $Q : S \times A \longrightarrow R$ given by: 
-$$Q^{\pi}(s, a) = \mathbb{E}[R_1+ \gamma R_2 + \cdots | s_0 = s, a =a, \pi]$$
-
-which is the expectation of sum of rewards by starting in state $s$ taking action $a$ and following policy $\pi$. Here $\gamma \in (0, 1]$ is a discount factor for future rewards. If Q-value function is computable for all possible policies in the system the optimal policy should be: $\forall  s \in S \; \pi^*(s) = \text{argmax}_a Q^{\pi^*}(s, a) \; $.  
-
-Q-learning algorithm \cite{sutton1998} is a model free method for learning the optimal Q-value function. Since Q-value function should be calculated for each sequence of state$\backslash$actions, computing $Q(s, a)$ for real environments with great number of states or actions  is impractical.  To tackle this problem Mnih et al.\shortcite{mnih2015} introduce the Deep Q-network for approximating the Q-value function with a non-linear multi layer convolutional neural network.  Given state $s$ and action $a$, the DQN gives $Q(s, a; \theta)$ value where $\theta$ are parameters for the neural network. \question{If we model the Q-value function as $Q(s, .; \theta)$ where gets sate $s$ and outputs a vector of action values is better in term of calculation time. Our current model is the naive form.} 
+%%%%%%%%
+\begin{figure}[!t]
+\centering
+\includegraphics[scale=0.3]{./images/neural-network.png}
+\caption{Deep Q-network framework for our web navigation system}
+\label{fig:naviagte}
+\end{figure}
+%%%%%%%%%
 
 \paragraph{Queries: }  Since \textit{unoporuno} is an intelligent web navigation system, it requires some search engines and query generation models. In our work , we use four search engines including Google, DuckDuckGo, Researchgate, Citeceerx \PA{the search engine list should be modified. I didn't find the list.} . As person name is received from an available sociologist database, for each person we have $7$ possible number of queries as: \\
 
@@ -28,4 +28,3 @@ This MDP is defined as a tuple $M(S, A, P, r, \gamma)$ where $S$ is a set of sta
 	\item The \textit{transition function} $P$ 
 	\item The system goal is to extract the closest extracted organisation names and dates to the gold standards by generating less number of queries. For this reason, choosing $q$ action in any sate has a negative reward. And every time the extracted organisation name or date from a new snippet is close to the gold standards, the system receives a positive reward for instance $r(s, q) = -0.1$ or $r(s, d) = 10$ if the extracted organisation name (year) is in the list of organisation names (years) for the gold standards. 
 \end{itemize}
-

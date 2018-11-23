@@ -1,0 +1,10 @@
+In the Reinforcement Learning environment with a state set $S = s_1, \cdots, s_m$ and a  set of possible actions $A = a_1, \cdots, a_m$, the agent interacts with the environment by selecting an action $a$ in each state $s$ and going to the next state $s'$ until the terminal state condition is satisfied. This process is guided by a function namely policy $\pi : S \longrightarrow A$ by interacting the environment. The policy is calculable by assigning a punishment or reward $r(s, a)$ to each selected action $a$ in any state $s$.  
+
+A way of defining the quality of policies is the Q-value function $Q : S \times A \longrightarrow \mathbb{R}$ given by: 
+$$Q^{\pi}(s, a) = \mathbb{E}[R_1+ \gamma R_2 + \cdots | s_0 = s, a =a, \pi]$$
+
+which is the expectation of sum of rewards by starting in state $s$ taking action $a$ and following policy $\pi$. Here $\gamma \in (0, 1]$ is a discount factor for future rewards. If Q-value function is computable for all possible policies in the system the optimal policy should be: $\forall  s \in S \; \pi^*(s) = \text{argmax}_a Q^{\pi^*}(s, a) \; $.  
+
+Q-learning algorithm \cite{sutton1998} is a model free method for learning the optimal Q-value function. Since Q-value function should be calculated for each sequence of state$\backslash$actions, computing $Q(s, a)$ for real environments with great number of states or actions  is impractical.  To tackle this problem Mnih et al.\shortcite{mnih2015} introduce the Deep Q-network for approximating the Q-value function with a non-linear multi layer convolutional neural network.  Given state $s$ and action $a$, the DQN gives $Q(s, a; \theta)$ value where $\theta$ are parameters for the neural network. (\question{If we model the Q-value function as $Q(s, .; \theta)$ where gets sate $s$ and outputs a vector of action values is better in term of calculation time. Our current model is the naive form.})
+
+

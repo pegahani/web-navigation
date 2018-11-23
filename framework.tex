@@ -48,7 +48,7 @@ sample eandom mini-batch of transitions $(s_j, a_j, r_j, s_{j+1}) $ from $\mathc
 \eIf{$s_{j+1}$ is terminal}{
 	$y_j = r_j$
 }{
-	$y_j = r_j + \gamma \text{max}_{a'} Q(s_{j+1}, a';\theta)$
+	$y_j = r_j + \gamma \text{max}_{a'} Q(s_{j+1}, a';\theta)$ (\PA{this part should be explained and modified. Because we test double Q network too in the experiments.})
 }
 perform gradient descent on the loss $L(\theta)$ based on $y_j$ (\PA{that should be explained too})\\
 \If{$s_{t+1}$ is a terminal state}{

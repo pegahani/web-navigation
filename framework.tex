@@ -11,7 +11,7 @@
 
 \begin{algorithm}[h]
  \small{
- \KwData{Initialize an experience replay memory $\mathcal{D}$ with $N$ capacity (\PA{It should be explained in experiments})}
+ \KwData{Initialize an experience replay memory $\mathcal{D}$ with $N$ capacity }
  \KwResult{$Q$-value function after training}
 Initialize a Q-value function $Q$ with random weight $\theta$\\ 
  \For{episode $=0$ \KwTo $M$ }{
@@ -65,7 +65,10 @@ $<$person name$>$ $+$ (  [] $|$ doctorate $|$ institute $|$ master $|$ undergrad
 \end{itemize}
 
 \paragraph{Algorithm}
-A Deep Q-network (algorithm~\ref{algo:qdn}) demonstrates our approach for learning the experts professional tracks. Referring to the model each new observed snippet should be presented as a state. The $\pi$ function in the algorithm signifies our utilised representation for a new observed snippets. According to Figure~\ref{fig:model} and the above explanation on the state representation, we have two models depending on the used neural network model for the Q-value function computation. 
+A Deep Q-network (algorithm~\ref{algo:qdn}) demonstrates our approach for learning the experts professional tracks. 
+In the initialization step, we start with a replay memory $\mathcal{D}$ storing transition examples $(s, a, r, s' )$ and a neural network for the $Q$-value function with random weights $\theta$. The whole training dataset is passed through for $M$ epochs. 
+
+Referring to the model each new observed snippet should be presented as a state. The $\pi$ function in the algorithm signifies our utilised representation for a new observed snippets. According to Figure~\ref{fig:model} and the above explanation on the state representation, we have two models depending on the used neural network model for the Q-value function computation. 
 \begin{itemize}
 \item If $\phi$ is the vector representation, the neural network of our experiments is a regular densely-connected NN with $3$ layers. The first two layers use \textit{RELU} as their activation functions with a $0.25$ rate dropout for each, while the final layer has a \textit{linear} activation function. 
 \item If $\phi$ keeps the snippet, the neural network of our experiments is a Long Short Term Memory (LSTM) (\question{that should be completed by Ivan})
@@ -73,8 +76,13 @@ A Deep Q-network (algorithm~\ref{algo:qdn}) demonstrates our approach for learni
 
 From the feedback of environment in the form of rewards, the network parameters $\theta$ should be learned. To perform update of $\theta$, we keep an experience memory $\mathcal{D}$ for saving state transitions. In each backpropogation step, the $\theta$ parameters are calculated by sampling a mini-batch of transitions $(s', a', s'', r')$ at random from $\mathcal{D}$ and minimising the following loss function \footnote{The loss function is a mean square error function}:
 $$L(\theta) = \mathbb{E}_{s', a'}[(y - Q(\phi(s'), a', \theta ))^2]$$
-If we test the DQN algorithm, $y$ is calculated using two formulas in lines $14$ and $16$ from the algorithm~\ref{algo:qdn}. \PA{On the other hand we have some tests on Dueling DQN (DDQN)\cite{wang2016} which is simply different from the DQN by replacing line $16$ with }
+If we test the DQN algorithm, $y$ is calculated using two formulas in lines $14$ and $16$ from the algorithm~\ref{algo:qdn}. \PA{On the other hand we have some experiments with Dueling DQN (DDQN)\cite{wang2016} which is the same as the DQN except the line of $16$ in the algorithm. }
 
+{\small{$$y_j = r_j + \gamma Q\left( \phi(s_{j+1}), \text{argmax}_{a'} Q(\phi(s_{j+1}), a';\theta); \theta^- \right)$$}}
+
+\PA{To deal with the overoptimistic value estimation,the DDQN uses two neural networks for selecting the best action (with parameters $\theta$) and evaluating an action by computing Q-value function with $\theta^-$ pramaters from the previous iteration. }
+
+\question{we will add a brief explanation for finishing on algorithms after being certain about the experiments.}
 
 
 

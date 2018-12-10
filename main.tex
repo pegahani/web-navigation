@@ -90,12 +90,12 @@
 
   %We present at a first time, a people tracking system (specifically the expert people with available and extractable information in the web) as an application of deep reinforcement learning and natural language processing methods to the immigration sociology. The Deep Q-network has been used for extracting information from huge size text datasets and finding the most precise name entities. In this paper, for the sociology term of usage, we propose a method for tracking a give person name and extracting her optimal professional trajectory by exploring the web and generating as less as possible number of queries. Our proposed approach is based on a Deep Q-network method with various neural networks for the Q-value function approximation. We improve the existed people search systems by tracking the experts professional trajectories instead of just labeling them as a mobile or local person w.r.t their origin countries.  
 \end{abstract}
-
+ 
 \section{Introduction}
-Luis Fernandez\footnote{All names have been changed to protect identity.} grew up in Argentina and studied a Biotechnology Masters's degree at the University of Buenos Aires. In $2010$ he got an international scholarship and went to Essex University for a PhD. Where is he now? Did he stay in the UK, or did he come back to Argentina? How did his expert skills evolve? In other words, what are his \textit{professional mobility traces}?
+Luis Fernandez\footnote{All names have been changed to protect identity.} grew up in Argentina and studied a Biotechnology Masters's degree at the University of Buenos Aires. In $2010$ he got an international scholarship and went to Essex University for a PhD. Where is he now? Did he stay in the UK, or did he come back to Argentina? How did his expert skills evolve? In other words, what are his professional mobility traces?
 
-Reaching expatriate members of the \textit{highly qualified diaspora} is a major challenge for policy makers \cite{CIDESAL}. Migrations sociologists studying mobility patterns of this \textit{diaspora of knowledge} use statistical sources, like population censues, labor force surveys and administrative data \cite{Turner}. However, these sources are not entirely satisfactory when monitoring constantly changing mobility trends, so recent scientific efforts have been dedicated to mine the Web in order better understand the dynamics of this expert migration flow \cite{GarciaFlores, Russians, Auriol2010}.
-
+Reaching expatriate members of the highly qualified diaspora is a major challenge for policy makers \cite{oecd2012, diaspora2015}. Migrations sociologists studying mobility patterns of this diaspora of knowledge use statistical sources, like population censuses, labor force surveys and administrative data. However, these sources are not entirely satisfactory when monitoring constantly changing mobility trends \cite{Turner2015}, so recent scientific efforts have been dedicated to mine the Web in order better understand the dynamics of this expert migration flow \cite{Flores2012, Lepinay2014, Auriol2010}. 
+ 
 %%%%%%%%%%%
 \begin{figure}[!t]
 \centering
@@ -104,10 +104,10 @@ Reaching expatriate members of the \textit{highly qualified diaspora} is a major
 \label{fig:traj}
 \end{figure}
 %%%%%%%%%
-This paper presents ongoing research on extracting experts mobility trajectories from the web by means of a reinforcement learning (RL}) based method. Given an expert's name, our method harvests information from web search engines in order to extract a set of named entity triplets \texttt{<institution, city, year>} considered as meaningful points in the expert's mobility trajectory. Figure~\ref{fig:traj} shows the mobility trajectory of two biotechnology experts. Migration sociologists are particularly interested in the \textit{brain drain/brain gain} phenomenon \cite{Meyer}: while the top example of the figure has not returned to his/hers home country, the bottom individual has.
+This paper presents ongoing research on extracting experts mobility trajectories from the web by means of a reinforcement learning (RL}) based method. Given an expert's name, our method harvests information from web search engines in order to extract a set of named entity triplets \texttt{<institution, city, year>} considered as meaningful points in the expert's mobility trajectory. Figure~\ref{fig:traj} shows the mobility trajectory of two biotechnology experts. Migration sociologists are particularly interested in the brain drain/brain gain debate \cite{Meyer2006}: while the top example of the figure has not returned to his/hers home country, the bottom individual has.
 %In this work, we are interested in extracting a trajectory for each given expert including her organisation names and the related years by searching their given names through the web and extracting as accurate as possible name entities (In the rest of this work, by the name entities we mean the organisation names, university names or dates) from the web.  For instance, a researcher as ``Luis Fernandez" has a mobile professional trajectory with various oraganisations and year of experience as figure~\ref{fig:traj} (top graph) though another person (the bottom graph) has a local professional trajectory and he works in his original country recently.  
   
-An intuitive approach for extracting experts mobility trajectories consists on querying web search engines with the expert's name plus different keywords, and then extracting city, institution and year from the resulting snippets list. The main question then would be when to generate a new query and which snippets should be taken into account in order to extract meaningful named entities concerning the expert's professional trajectory. Recent scientific evidence shows promising results of Deep-Q networks based methods on information extraction tasks \citep{narasimhan2016improving}, as well as on object detection in images \cite{Caicedo2015}, arithmetic word problems solving \cite{wang2018} and text generation \citep{Guo2015}. Inspired by Narasimhan et al. \shortcite{narasimhan2016improving} work on information extraction from huge search spaces, we model the expert's mobility traces extraction task as an optimal policy search in RL, where we consider a Deep Q-network and various neural network models to learn Q-value functions and approximate the optimal expert's track for a given expert name.  
+An intuitive approach for extracting experts mobility trajectories consists on querying web search engines with the expert's name plus different keywords, and then extracting city, institution and year from the resulting snippets list. The main question then would be when to generate a new query and which snippets should be taken into account in order to extract meaningful named entities concerning the expert's professional trajectory. Recent scientific evidence shows promising results of Deep-Q networks based methods on information extraction tasks \citep{narasimhan2016improving}, as well as on object detection in images \cite{Caicedo2015}, arithmetic word problems solving \cite{wang2018} and text generation \citep{Guo2015}. Inspired by Narasimhan et al. \shortcite{narasimhan2016improving} work on information extraction from huge search spaces, we model the expert's mobility traces extraction task as an optimal policy search in RL, where we consider a Deep Q-network and various neural network (NN) models to learn Q-value functions and approximate the optimal expert's track for a given expert name.  
 %for tracking each given expert's profession usingbased  deep reinforcement learning (DRL) approach. Deep Q-network (DQN) usage in various problems and the tracking issue as a planning problem motivate us concentrating on this approach.
 
 The main contribution of the present paper are:
@@ -117,6 +117,8 @@ The main contribution of the present paper are:
 \item \PA{We test our methods on .... dataset and improve the results by .... }
 \end{itemize}
 
+The paper is organized as follows: section~\ref{related} presents previous work on mobility traces extraction and information extraction with Deep RL based methods. Section ~\ref{ourmethod} proposes an specific Deep RL algorithm and a NN architecture for expert mobility traces extraction from web search results. Section~\ref{data} gives some insight on our experimental testbed, while section~\ref{experiments} evaluates the proposed method. Finally, section~\ref{conclusion} concludes the paper and proposed further research perspectives.
+
 %\begin{figure}[!t]
 %\centering
 %\includegraphics[scale=0.22]{./images/navigate.png}
@@ -124,27 +126,29 @@ The main contribution of the present paper are:
 %\label{fig:navigate}
 %\end{figure}
 
-\section{Related Work}
+\section{Related Work}\label{related}
 \remJGF{Complete the Digital Humanities part}
 \remJGF{While this task is close to Web People Search \cite{WPS}, here we choose a different approach, where we progressively query} 
 In this section we review the literature of the \textit{Deep Reinforcement Learning (DRL)} methods used for the web based information extraction problems. We also introduce a background on the application of \textit{Natural Language Processing (NLP)} and DRL methods on sociology of migration application and Web People Search (WPS) tasks. 
 
-\paragraph{Web People Search (\PA{or any similar title reviewing the literature for navigating immigration data base in the web})}
+\paragraph{Expert Mining and Web People Search}
+Most of the recent research efforts on expert finding have been dedicated to extract from from scientific publication collections \cite{Bordea2014, Bordea2013, Bordea2012}. The main focus of these works are topic-centered, so the sociological aspect of mobility is not taken into account, nor the technical problems of facing web search results.  
+\cite{Loffler2017} extracts semantic profiles. Usually, the stress is put on the expert-topic relationship \cite{Jonnalagadda2014, Bei2017}. Instead of finite document collections, the Linked Data Web is also used as a source for expert finding \cite{Stankovic2011}. On the other hand, the WePS (Web People Search campaigns)\cite{Amigo2010, Artiles2008} task was to cluster and identify person names from web search results. However, no keyword enrichment was used in this task \cite{Artiles2009}, and no temporal event detection was performed. After the WePS campaigns, the web people search tasks disappeared by itself, and its methods applied for online reputation processing \cite{Shad2016} and entity disambiguation by means of social networks user profile processing \cite{Amigo2013, Yerva2013}. 
 
 \paragraph{Deep Reinforcement Learning}
 \input{reinforcement.tex}
 
-\section{Framework and Solution}
+\section{Deep RL for expert mobility traces extraction}\label{ourmethod}
 \input{framework.tex}
 
-\section{Data}
+\section{Data}\label{data}
 \input{data.tex}
 
-\section{Experiments}
+\section{Experiments}\label{experiments}
 
-\section{Conclusions}
+\section{Conclusions}\label{conclusion}
 
-\section*{Acknowledgments}
+%\section*{Acknowledgments}
 
 \bibliography{naaclhlt2019}
 \bibliographystyle{acl_natbib}
